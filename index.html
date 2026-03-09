@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đoàn TNCS Hồ Chí Minh Xã Hòa Tú</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:#C8102E;--red-dark:#9B0020;--red-light:#E8234A;
+    --blue:#003087;--blue-mid:#1a4a9b;--blue-light:#2563c7;
+    --gold:#FFD700;--bg:#f4f6fa;--bg-card:#ffffff;
+    --text:#1a1a2e;--text-muted:#5a6078;--border:#dde3f0;
+    --shadow:0 2px 12px rgba(0,48,135,.10);--shadow-lg:0 8px 32px rgba(0,48,135,.15);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
+  a{text-decoration:none;color:inherit}
+
+  .topbar{background:var(--blue);color:#fff;font-size:12.5px;padding:5px 0;border-bottom:2px solid var(--gold)}
+  .topbar-inner{max-width:1200px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center}
+  .topbar a{color:#c9d8ff}.topbar a:hover{color:var(--gold)}
+  .topbar-right{display:flex;gap:16px;align-items:center}
+
+  .header{background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 45%,#e8234a 100%);position:relative;overflow:hidden}
+  .header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+  .header-inner{max-width:1200px;margin:0 auto;padding:18px 16px;display:flex;align-items:center;gap:20px;position:relative;z-index:1}
+  .header-logo{width:82px;height:82px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,.25);border:3px solid var(--gold)}
+  .header-title h1{font-family:'Merriweather',serif;font-size:20px;font-weight:900;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.3);line-height:1.3;text-transform:uppercase;letter-spacing:.5px}
+  .header-title h3{color:rgba(255,255,255,.85);font-size:13px;margin-top:3px}
+  .header-title .slogan{color:var(--gold);font-weight:600;font-size:13px;margin-top:4px;font-style:italic}
+  .header-right{margin-left:auto;display:flex;gap:10px}
+  .header-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:8px 14px;text-align:center;font-size:11px;backdrop-filter:blur(4px)}
+  .header-badge strong{display:block;font-size:22px;color:var(--gold);font-family:'Merriweather',serif}
+
+  nav{background:var(--blue);box-shadow:0 2px 8px rgba(0,0,0,.2);position:sticky;top:0;z-index:100}
+  .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:stretch}
+  .nav-item{position:relative;display:flex;align-items:center}
+  .nav-item>a{color:#d6e4ff;font-size:12.5px;font-weight:600;padding:14px 17px;display:block;letter-spacing:.3px;transition:all .2s;white-space:nowrap;text-transform:uppercase}
+  .nav-item>a:hover,.nav-item.active>a{background:var(--red);color:#fff}
+  .nav-item.active>a{border-bottom:3px solid var(--gold)}
+  .dropdown{display:none;position:absolute;top:100%;left:0;background:#fff;min-width:220px;box-shadow:var(--shadow-lg);border-top:3px solid var(--red);z-index:200}
+  .nav-item:hover .dropdown{display:block}
+  .dropdown a{display:block;padding:10px 16px;color:var(--text);font-size:13px;border-bottom:1px solid var(--border);transition:all .2s}
+  .dropdown a:hover{background:#f0f4ff;color:var(--blue);padding-left:22px}
+  .nav-search{margin-left:auto;display:flex;align-items:center;padding:8px 12px}
+  .nav-search input{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:20px 0 0 20px;padding:6px 14px;color:#fff;font-size:13px;outline:none;width:170px}
+  .nav-search input::placeholder{color:rgba(255,255,255,.5)}
+  .nav-search button{background:var(--red);border:none;color:#fff;padding:6px 12px;border-radius:0 20px 20px 0;cursor:pointer;font-size:13px}
+
+  .ticker{background:#fff;border-bottom:2px solid var(--red);padding:7px 0;overflow:hidden}
+  .ticker-inner{max-width:1200px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:12px}
+  .ticker-label{background:var(--red);color:#fff;font-weight:700;font-size:11px;padding:3px 10px;border-radius:3px;white-space:nowrap;text-transform:uppercase}
+  .ticker-track{overflow:hidden;flex:1}
+  .ticker-text{display:inline-block;white-space:nowrap;animation:ticker 30s linear infinite;color:var(--text);font-size:13px}
+  @keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+
+  .main{max-width:1200px;margin:0 auto;padding:20px 16px;display:grid;grid-template-columns:1fr 290px;gap:22px}
+
+  .hero{border-radius:10px;overflow:hidden;box-shadow:var(--shadow-lg);position:relative;background:var(--blue);aspect-ratio:16/7;margin-bottom:22px}
+  .hero-slide{position:absolute;inset:0;display:none;align-items:flex-end}
+  .hero-slide.active{display:flex}
+  .hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:80px}
+  .hero-slide:nth-child(1) .hero-bg{background:linear-gradient(135deg,#001a5e,#003087,#1a4a9b)}
+  .hero-slide:nth-child(2) .hero-bg{background:linear-gradient(135deg,#7b0017,#C8102E,#e8234a)}
+  .hero-slide:nth-child(3) .hero-bg{background:linear-gradient(135deg,#003d00,#005c00,#008000)}
+  .hero-caption{position:relative;z-index:2;padding:24px 28px;background:linear-gradient(transparent,rgba(0,0,0,.75));width:100%}
+  .hero-tag{background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:3px;text-transform:uppercase;display:inline-block;margin-bottom:8px}
+  .hero-caption h2{color:#fff;font-size:20px;font-weight:700;line-height:1.35;text-shadow:0 2px 8px rgba(0,0,0,.4);margin-bottom:6px}
+  .hero-caption p{color:rgba(255,255,255,.8);font-size:13px}
+  .hero-dots{position:absolute;bottom:12px;right:14px;display:flex;gap:6px;z-index:10}
+  .hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s;border:none}
+  .hero-dot.active{background:var(--gold);width:22px;border-radius:4px}
+  .hero-arrows{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 10px;z-index:10}
+  .hero-arrow{background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;backdrop-filter:blur(4px);transition:all .2s}
+  .hero-arrow:hover{background:var(--red)}
+
+  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--red);position:relative}
+  .section-header::after{content:'';position:absolute;bottom:-2px;left:0;width:60px;height:2px;background:var(--blue)}
+  .section-title{display:flex;align-items:center;gap:8px;font-family:'Merriweather',serif;font-size:15px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.5px}
+  .section-title .icon{background:var(--red);color:#fff;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .see-all{color:var(--red);font-size:12.5px;font-weight:600;display:flex;align-items:center;gap:4px;transition:gap .2s}
+  .see-all:hover{gap:8px}
+
+  .news-featured{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  .news-card{background:var(--bg-card);border-radius:8px;overflow:hidden;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;cursor:pointer}
+  .news-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .news-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative}
+  .bg1{background:linear-gradient(135deg,#001f6e,#003087)}.bg2{background:linear-gradient(135deg,#7b0017,#C8102E)}
+  .bg3{background:linear-gradient(135deg,#7b4700,#cc7000)}.bg4{background:linear-gradient(135deg,#1a5200,#2d8a00)}.bg5{background:linear-gradient(135deg,#4a0080,#7a00cc)}
+  .news-cat{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;text-transform:uppercase}
+  .news-body{padding:14px}
+  .news-body h3{font-size:14px;font-weight:700;color:var(--text);line-height:1.45;margin-bottom:6px}
+  .news-body p{color:var(--text-muted);font-size:12.5px;line-height:1.5}
+  .news-meta{display:flex;gap:10px;margin-top:8px;font-size:11.5px;color:var(--text-muted)}
+
+  .news-list{margin-bottom:20px}
+  .news-list-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all .2s}
+  .news-list-item:hover .news-list-title{color:var(--red)}
+  .news-list-thumb{width:75px;height:55px;border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px}
+  .news-list-content{flex:1}
+  .news-list-title{font-size:13.5px;font-weight:600;line-height:1.4;margin-bottom:3px}
+  .news-list-date{font-size:11.5px;color:var(--text-muted)}
+
+  .tabs{display:flex;gap:2px;margin-bottom:14px;border-bottom:2px solid var(--border)}
+  .tab-btn{padding:8px 15px;font-size:13px;font-weight:600;color:var(--text-muted);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+  .tab-btn.active{color:var(--red);border-bottom-color:var(--red)}
+  .tab-btn:hover{color:var(--blue)}
+  .tab-content{display:none}
+  .tab-content.active{display:block}
+
+  .content-section{margin-bottom:24px}
+
+  .doc-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all .2s}
+  .doc-item:hover .doc-title{color:var(--red)}
+  .doc-icon{width:38px;height:38px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;background:#fee8ec;color:var(--red)}
+  .doc-title{font-size:13.5px;font-weight:600;line-height:1.4}
+  .doc-meta{font-size:11.5px;color:var(--text-muted)}
+
+  .banner-strip{background:linear-gradient(135deg,var(--red-dark),var(--red));border-radius:8px;padding:18px 22px;display:flex;align-items:center;gap:16px;margin-bottom:22px;position:relative;overflow:hidden}
+  .banner-strip::before{content:'★';position:absolute;right:20px;font-size:80px;color:rgba(255,255,255,.06)}
+  .banner-strip h3{color:#fff;font-size:16px;font-weight:700}
+  .banner-strip p{color:rgba(255,255,255,.8);font-size:13px}
+  .banner-strip .icon{font-size:36px}
+
+  .sidebar{display:flex;flex-direction:column;gap:18px}
+  .widget{background:var(--bg-card);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
+  .widget-header{background:var(--blue);color:#fff;padding:10px 14px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:8px}
+  .widget-body{padding:14px}
+
+  .cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .cal-nav button{background:none;border:none;cursor:pointer;color:var(--blue);font-size:16px}
+  .cal-title{font-weight:700;color:var(--blue);font-size:14px}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}
+  .cal-day-name{font-size:11px;font-weight:700;color:var(--text-muted);padding:4px 0}
+  .cal-day{font-size:12px;padding:5px 3px;border-radius:4px;cursor:pointer;transition:all .15s}
+  .cal-day:hover{background:#e8eeff}
+  .cal-day.today{background:var(--red);color:#fff;font-weight:700}
+  .cal-day.has-event{position:relative}
+  .cal-day.has-event::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:var(--blue);border-radius:50%}
+  .cal-day.other-month{color:#ccc}
+
+  .schedule-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+  .schedule-date{background:var(--red);color:#fff;border-radius:5px;padding:4px 8px;text-align:center;font-weight:700;font-size:11px;min-width:38px;flex-shrink:0}
+  .schedule-date span{display:block;font-size:16px;line-height:1}
+
+  .link-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);color:var(--blue);font-size:13px;font-weight:500;transition:all .2s}
+  .link-item:hover{color:var(--red);padding-left:4px}
+  .link-item .link-icon{width:28px;height:28px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;background:#e8eeff}
+
+  .counter-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .counter-item{background:linear-gradient(135deg,var(--blue),var(--blue-light));border-radius:6px;padding:10px 8px;text-align:center;color:#fff}
+  .counter-item.red{background:linear-gradient(135deg,var(--red-dark),var(--red-light))}
+  .counter-item strong{display:block;font-size:22px;font-family:'Merriweather',serif;color:var(--gold)}
+  .counter-item small{font-size:11px;opacity:.85}
+
+  footer{background:linear-gradient(180deg,var(--blue) 0%,#001a52 100%);color:#c9d8ff;margin-top:30px}
+  .footer-top{max-width:1200px;margin:0 auto;padding:36px 16px 24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .footer-brand h3{color:#fff;font-family:'Merriweather',serif;font-size:14px;font-weight:700;text-transform:uppercase;margin-bottom:10px;line-height:1.4}
+  .footer-brand p{font-size:12.5px;line-height:1.7}
+  .footer-brand .contact-info{margin-top:12px}
+  .footer-brand .contact-info li{list-style:none;font-size:12.5px;padding:3px 0;display:flex;gap:6px}
+  .footer-col h4{color:var(--gold);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .footer-col ul{list-style:none}
+  .footer-col ul li{padding:4px 0}
+  .footer-col ul li a{font-size:12.5px;color:#c9d8ff;transition:color .2s;display:flex;align-items:center;gap:5px}
+  .footer-col ul li a:hover{color:var(--gold)}
+  .footer-col ul li a::before{content:'›';color:var(--red);font-weight:bold}
+  .footer-bottom{max-width:1200px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,.5)}
+  .footer-bottom a{color:rgba(255,255,255,.5)}
+  .footer-bottom strong{color:var(--gold)}
+
+  @media(max-width:768px){
+    .main{grid-template-columns:1fr}
+    .footer-top{grid-template-columns:1fr 1fr}
+    .news-featured{grid-template-columns:1fr}
+    .header-right{display:none}
+    .header-title h1{font-size:15px}
+  }
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  .widget,.news-card,.content-section{animation:fadeInUp .4s ease both}
+</style>
+</head>
+<link rel="icon" type="image/x-icon" href="favicon.ico" style ="border-radius: 20px">
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>📅 Thứ Hai, ngày 09 tháng 03 năm 2026 &nbsp;|&nbsp; Chào mừng đến với trang Đoàn TNCS Hồ Chí Minh xã Hòa Tú</span>
+    <div class="topbar-right">
+      <a href="#">Đăng nhập</a><span>|</span><a href="#">Liên hệ</a><span>|</span><a href="#">RSS</a>
+    </div>
+  </div>
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-logo">
+        <img src="https://calm-aquamarine-upojkrru7l.edgeone.app/z6971965917114_fe7df59ac94d9c8a11751ef9880fba3c-Photoroom.png" alt="Logo" height="80"/>
+    </div>
+    <div class="header-title">
+      <h1>Đoàn TNCS Hồ Chí Minh Xã Hòa Tú</h1>
+      <h3>Thành phố Cần Thơ</h3>
+      <p class="slogan">"Đoàn kết – Sáng tạo – Tiên phong – Hành động"</p>
+    </div>
+    <div class="header-right">
+      <div class="header-badge"><strong>247</strong>Đoàn viên</div>
+      <div class="header-badge"><strong>12</strong>Chi đoàn</div>
+      <div class="header-badge"><strong>3</strong>Liên chi đoàn</div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-item active"><a href="#">🏠 Trang chủ</a></div>
+    <div class="nav-item">
+      <a href="#">🏛️ Cơ cấu tổ chức ▾</a>
+      <div class="dropdown">
+        <a href="#">Ban Chấp hành Đoàn xã</a>
+        <a href="#">Các chi đoàn trực thuộc</a>
+        <a href="#">Hội đồng Đội xã</a>
+        <a href="#">Chức năng, nhiệm vụ</a>
+        <a href="#">Lịch sử hình thành</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#">🎯 Hoạt động Đoàn ▾</a>
+      <div class="dropdown">
+        <a href="#">Công tác Đoàn</a>
+        <a href="#">Phong trào thanh niên</a>
+        <a href="#">Tình nguyện – Xung kích</a>
+        <a href="#">Học tập – Sáng tạo</a>
+        <a href="#">Đoàn kết – Hỗ trợ</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#">🤝 Hoạt động Hội ▾</a>
+      <div class="dropdown">
+        <a href="#">Hội LHTN Việt Nam xã</a>
+        <a href="#">Câu lạc bộ thanh niên</a>
+        <a href="#">Hoạt động thiện nguyện</a>
+        <a href="#">Sự kiện Hội</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#">📋 Hệ thống văn bản ▾</a>
+      <div class="dropdown">
+        <a href="#">Văn bản Trung ương Đoàn</a>
+        <a href="#">Văn bản Tỉnh Đoàn</a>
+        <a href="#">Văn bản Huyện Đoàn</a>
+        <a href="#">Văn bản Đoàn xã</a>
+        <a href="#">Điều lệ Đoàn TNCS HCM</a>
+      </div>
+    </div>
+    <div class="nav-item">
+      <a href="#">📸 Ảnh – Video ▾</a>
+      <div class="dropdown">
+        <a href="#">Thư viện ảnh</a>
+        <a href="#">Video hoạt động</a>
+        <a href="#">Ký ức Đoàn xã</a>
+      </div>
+    </div>
+    <div class="nav-search">
+      <input type="text" placeholder="Tìm kiếm...">
+      <button>🔍</button>
+    </div>
+  </div>
+</nav>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-label">🔔 Tin mới</span>
+    <div class="ticker-track">
+      <span class="ticker-text">📢 Triển khai Chương trình "Thanh niên tình nguyện hè 2026" &nbsp;|&nbsp; 🏆 Đoàn xã Hòa Tú đạt danh hiệu "Đoàn cơ sở xuất sắc" năm 2025 &nbsp;|&nbsp; 📣 Thông báo: Kỳ họp BCH Đoàn xã tháng 3/2026 vào ngày 15/3 &nbsp;|&nbsp; 🌟 Phong trào "Thanh niên khởi nghiệp" năm 2026 chính thức phát động &nbsp;|&nbsp; 🎯 Lễ kết nạp Đoàn viên mới năm 2026 tại Hội trường UBND xã</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+<main>
+
+  <div class="hero" id="hero">
+    <div class="hero-slide active">
+      <div class="hero-bg">🌟</div>
+      <div class="hero-caption">
+        <span class="hero-tag">Sự kiện nổi bật</span>
+        <h2>Đại hội Đoàn TNCS Hồ Chí Minh xã Hòa Tú lần thứ XII nhiệm kỳ 2025–2027</h2>
+        <p>Đại hội bầu ra Ban Chấp hành mới gồm 15 đồng chí, thống nhất phương hướng hoạt động nhiệm kỳ mới với nhiều đột phá</p>
+      </div>
+    </div>
+    <div class="hero-slide">
+      <div class="hero-bg">🤝</div>
+      <div class="hero-caption">
+        <span class="hero-tag">Tình nguyện</span>
+        <h2>Chiến dịch "Mùa hè xanh 2026" – Thanh niên Hòa Tú tiên phong xây dựng nông thôn mới</h2>
+        <p>Hàng trăm đoàn viên thanh niên tham gia xây dựng công trình thanh niên, làm sạch đường làng, ngõ xóm</p>
+      </div>
+    </div>
+    <div class="hero-slide">
+      <div class="hero-bg">🌱</div>
+      <div class="hero-caption">
+        <span class="hero-tag">Khởi nghiệp</span>
+        <h2>Hội thảo "Thanh niên khởi nghiệp, sáng tạo" tại xã Hòa Tú năm 2026</h2>
+        <p>20 mô hình kinh tế thanh niên tiêu biểu được vinh danh và hỗ trợ phát triển sản xuất, kinh doanh</p>
+      </div>
+    </div>
+    <div class="hero-arrows">
+      <button class="hero-arrow" onclick="changeSlide(-1)">&#8249;</button>
+      <button class="hero-arrow" onclick="changeSlide(1)">&#8250;</button>
+    </div>
+    <div class="hero-dots">
+      <button class="hero-dot active" onclick="goSlide(0)"></button>
+      <button class="hero-dot" onclick="goSlide(1)"></button>
+      <button class="hero-dot" onclick="goSlide(2)"></button>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-header">
+      <div class="section-title"><span class="icon">📰</span> Tin tức – Sự kiện</div>
+      <a href="#" class="see-all">Xem tất cả →</a>
+    </div>
+    <div class="news-featured">
+      <div class="news-card">
+        <div class="news-thumb bg1">🎉<span class="news-cat">Sự kiện</span></div>
+        <div class="news-body">
+          <h3>Kỷ niệm 95 năm ngày thành lập Đoàn TNCS Hồ Chí Minh (26/3/1931 – 26/3/2026)</h3>
+          <p>Đoàn xã Hòa Tú tổ chức lễ kỷ niệm trọng thể và chương trình văn nghệ chào mừng với sự tham gia của đông đảo đoàn viên...</p>
+          <div class="news-meta"><span>📅 20/03/2026</span><span>👁 1.2k lượt xem</span></div>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb bg2">🏆<span class="news-cat">Thành tích</span></div>
+        <div class="news-body">
+          <h3>Đoàn xã Hòa Tú được tặng Bằng khen của UBND tỉnh Sóc Trăng năm 2025</h3>
+          <p>Ghi nhận những đóng góp xuất sắc trong phong trào thi đua yêu nước và xây dựng nông thôn mới nâng cao...</p>
+          <div class="news-meta"><span>📅 15/03/2026</span><span>👁 856 lượt xem</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab(this,'tab1')">🎯 Tin tức Đoàn</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab2')">🤝 Tin tức Hội</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab3')">🏛️ Tin Trung ương Đoàn</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab4')">📌 Tin tức khác</button>
+    </div>
+
+    <div class="tab-content active" id="tab1">
+      <div class="news-list">
+        <div class="news-list-item"><div class="news-list-thumb bg1">🎓</div><div class="news-list-content"><div class="news-list-title">Lớp bồi dưỡng lý luận chính trị cho đoàn viên mới kết nạp năm 2026 tại Hội trường UBND xã</div><div class="news-list-date">📅 08/03/2026 | Đoàn xã Hòa Tú</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg2">🌿</div><div class="news-list-content"><div class="news-list-title">Phát động phong trào "Ngày Chủ nhật xanh" dọn vệ sinh môi trường tháng 3/2026</div><div class="news-list-date">📅 05/03/2026 | BCH Đoàn xã</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg4">⚽</div><div class="news-list-content"><div class="news-list-title">Giải bóng đá thanh niên tranh Cúp Đoàn xã Hòa Tú năm 2026 – Khai mạc vòng sơ loại</div><div class="news-list-date">📅 01/03/2026 | BCH Đoàn xã</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg3">📚</div><div class="news-list-content"><div class="news-list-title">Cuộc thi "Tìm hiểu lịch sử Đảng Cộng sản Việt Nam" dành cho đoàn viên thanh niên xã Hòa Tú</div><div class="news-list-date">📅 25/02/2026 | BCH Đoàn xã</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg5">🎤</div><div class="news-list-content"><div class="news-list-title">Hội nghị sơ kết công tác Đoàn và phong trào thanh thiếu nhi tháng 02/2026</div><div class="news-list-date">📅 20/02/2026 | Ban Thường vụ</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg1">💡</div><div class="news-list-content"><div class="news-list-title">Kết nạp 24 đoàn viên mới nhân dịp kỷ niệm 96 năm ngày thành lập Đảng (3/2/2026)</div><div class="news-list-date">📅 03/02/2026 | BCH Đoàn xã</div></div></div>
+      </div>
+      <div style="text-align:center"><a href="#" style="display:inline-block;padding:8px 24px;background:var(--blue);color:#fff;border-radius:5px;font-size:13px;font-weight:600">Xem thêm tin tức Đoàn →</a></div>
+    </div>
+
+    <div class="tab-content" id="tab2">
+      <div class="news-list">
+        <div class="news-list-item"><div class="news-list-thumb bg2">🌸</div><div class="news-list-content"><div class="news-list-title">Hội LHTN xã Hòa Tú tổ chức chương trình "Xuân tình nguyện – Tết yêu thương" năm 2026</div><div class="news-list-date">📅 07/03/2026 | Hội LHTN xã</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg4">🏗️</div><div class="news-list-content"><div class="news-list-title">CLB Thanh niên xung kích bàn giao cầu nông thôn mới tại ấp Hòa Thọ, xã Hòa Tú</div><div class="news-list-date">📅 03/03/2026 | Hội LHTN xã</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg3">🩺</div><div class="news-list-content"><div class="news-list-title">Chương trình khám bệnh, phát thuốc miễn phí cho người dân khó khăn trên địa bàn xã</div><div class="news-list-date">📅 28/02/2026 | Hội LHTN xã</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg5">🎓</div><div class="news-list-content"><div class="news-list-title">Trao 15 suất học bổng "Tiếp bước đến trường" cho học sinh nghèo vượt khó năm học 2025–2026</div><div class="news-list-date">📅 20/02/2026 | Hội LHTN xã</div></div></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab3">
+      <div class="news-list">
+        <div class="news-list-item"><div class="news-list-thumb bg1">🏛️</div><div class="news-list-content"><div class="news-list-title">BCH Trung ương Đoàn họp phiên thường kỳ đầu năm 2026 bàn về công tác thanh niên và phong trào Đoàn</div><div class="news-list-date">📅 08/03/2026 | Trung ương Đoàn</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg2">🚀</div><div class="news-list-content"><div class="news-list-title">Trung ương Đoàn phát động Chiến dịch thanh niên tình nguyện hè 2026 với chủ đề "Vì cộng đồng"</div><div class="news-list-date">📅 05/03/2026 | Trung ương Đoàn</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg4">💻</div><div class="news-list-content"><div class="news-list-title">Chương trình "Chuyển đổi số cùng thanh niên" năm 2026 được triển khai rộng rãi trên toàn quốc</div><div class="news-list-date">📅 01/03/2026 | Trung ương Đoàn</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg3">🌏</div><div class="news-list-content"><div class="news-list-title">Đoàn Việt Nam tham dự Diễn đàn Thanh niên ASEAN 2026 tại Manila, Philippines</div><div class="news-list-date">📅 25/02/2026 | Trung ương Đoàn</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg5">📜</div><div class="news-list-content"><div class="news-list-title">Ban hành Quy chế đánh giá chất lượng Đoàn viên và tổ chức cơ sở Đoàn năm 2026</div><div class="news-list-date">📅 20/02/2026 | Trung ương Đoàn</div></div></div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab4">
+      <div class="news-list">
+        <div class="news-list-item"><div class="news-list-thumb bg1">🌾</div><div class="news-list-content"><div class="news-list-title">Tin địa phương: Xã Hòa Tú chính thức được công nhận xã nông thôn mới nâng cao năm 2025</div><div class="news-list-date">📅 06/03/2026 | UBND xã Hòa Tú</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg2">🏖️</div><div class="news-list-content"><div class="news-list-title">Huyện Đoàn Mỹ Xuyên triển khai kế hoạch hoạt động hè 2026 cho toàn bộ cơ sở Đoàn trong huyện</div><div class="news-list-date">📅 04/03/2026 | Huyện Đoàn Mỹ Xuyên</div></div></div>
+        <div class="news-list-item"><div class="news-list-thumb bg3">📢</div><div class="news-list-content"><div class="news-list-title">Tỉnh Đoàn Sóc Trăng phát động thi đua chào mừng 95 năm ngày thành lập Đoàn TNCS HCM</div><div class="news-list-date">📅 02/03/2026 | Tỉnh Đoàn Sóc Trăng</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <div class="section-header">
+      <div class="section-title"><span class="icon">📋</span> Văn bản – Quy định</div>
+      <a href="#" class="see-all">Xem tất cả →</a>
+    </div>
+    <div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-title">Quyết định về việc ban hành Chương trình hành động của Đoàn xã Hòa Tú năm 2026</div><div class="doc-meta">📅 01/01/2026 | Đoàn xã Hòa Tú | Số: 01/QĐ-ĐX</div></div></div>
+    <div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-title">Hướng dẫn đánh giá xếp loại Đoàn viên và tổ chức cơ sở Đoàn năm 2025–2026</div><div class="doc-meta">📅 15/12/2025 | Huyện Đoàn Mỹ Xuyên | Số: 45/HD-HĐ</div></div></div>
+    <div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-title">Kế hoạch tổ chức hoạt động kỷ niệm 95 năm ngày thành lập Đoàn TNCS Hồ Chí Minh (26/3/2026)</div><div class="doc-meta">📅 10/03/2026 | Tỉnh Đoàn Sóc Trăng | Số: 12/KH-TĐ</div></div></div>
+    <div class="doc-item"><div class="doc-icon">📜</div><div><div class="doc-title">Điều lệ Đoàn TNCS Hồ Chí Minh (Đại hội Đại biểu toàn quốc lần thứ XII)</div><div class="doc-meta">📅 2022 | Trung ương Đoàn TNCS Hồ Chí Minh</div></div></div>
+  </div>
+
+  <div class="banner-strip">
+    <span class="icon">🌿</span>
+    <div><h3>Chiến dịch Thanh niên tình nguyện Hè 2026</h3><p>Đăng ký tham gia và cùng chung tay xây dựng xã Hòa Tú ngày càng văn minh, phát triển</p></div>
+    <a href="#" style="margin-left:auto;background:#fff;color:var(--red);padding:10px 20px;border-radius:6px;font-weight:700;font-size:13px;white-space:nowrap">Đăng ký ngay</a>
+  </div>
+
+</main>
+
+<aside class="sidebar">
+
+  <div class="widget">
+    <div class="widget-header">📊 Thống kê tổ chức</div>
+    <div class="widget-body">
+      <div class="counter-grid">
+        <div class="counter-item"><strong>247</strong><small>Đoàn viên</small></div>
+        <div class="counter-item red"><strong>12</strong><small>Chi đoàn</small></div>
+        <div class="counter-item red"><strong>38</strong><small>Đảng viên trẻ</small></div>
+        <div class="counter-item"><strong>156</strong><small>Hội viên LHTN</small></div>
+      </div>
+      <div style="margin-top:12px;font-size:12px;color:var(--text-muted);text-align:center">Cập nhật tháng 3/2026</div>
+    </div>
+  </div>
+
+  <div class="widget">
+    <div class="widget-header">📅 Lịch tháng 3 – 2026</div>
+    <div class="widget-body">
+      <div>
+        <div class="cal-nav">
+          <button>&#8249;</button>
+          <span class="cal-title">Tháng 3 – 2026</span>
+          <button>&#8250;</button>
+        </div>
+        <div class="cal-grid">
+          <div class="cal-day-name">CN</div><div class="cal-day-name">T2</div><div class="cal-day-name">T3</div><div class="cal-day-name">T4</div><div class="cal-day-name">T5</div><div class="cal-day-name">T6</div><div class="cal-day-name">T7</div>
+          <div class="cal-day other-month">22</div><div class="cal-day other-month">23</div><div class="cal-day other-month">24</div><div class="cal-day other-month">25</div><div class="cal-day other-month">26</div><div class="cal-day other-month">27</div><div class="cal-day other-month">1</div>
+          <div class="cal-day">2</div><div class="cal-day has-event">3</div><div class="cal-day">4</div><div class="cal-day has-event">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div>
+          <div class="cal-day today">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day has-event">13</div><div class="cal-day">14</div><div class="cal-day has-event">15</div>
+          <div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day has-event">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
+          <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day has-event">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
+          <div class="cal-day">30</div><div class="cal-day">31</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="widget">
+    <div class="widget-header" style="background:var(--red)">📌 Lịch làm việc tháng 3</div>
+    <div class="widget-body">
+      <div class="schedule-item"><div class="schedule-date">T3<span>13</span></div><div>Họp BCH Đoàn xã thường kỳ Quý I/2026 tại Hội trường UBND xã</div></div>
+      <div class="schedule-item"><div class="schedule-date">CN<span>15</span></div><div>Lễ kết nạp Đoàn viên mới năm 2026 – Đợt 1 (đầu năm)</div></div>
+      <div class="schedule-item"><div class="schedule-date">T5<span>20</span></div><div>Lễ kỷ niệm 95 năm Ngày thành lập Đoàn TNCS Hồ Chí Minh</div></div>
+      <div class="schedule-item"><div class="schedule-date">T4<span>26</span></div><div>Mít tinh kỷ niệm Ngày thành lập Đoàn và trao giải thi đua</div></div>
+      <div class="schedule-item"><div class="schedule-date">T7<span>29</span></div><div>Ngày Chủ nhật xanh – Vệ sinh đường làng ngõ xóm toàn xã</div></div>
+    </div>
+  </div>
+
+  <div class="widget">
+    <div class="widget-header">🔗 Liên kết website</div>
+    <div class="widget-body">
+      <a href="https://doanthanhnien.vn" target="_blank" class="link-item"><div class="link-icon">🏛️</div> Trung ương Đoàn TNCS HCM</a>
+      <a href="#" class="link-item"><div class="link-icon">🌐</div> Thành Đoàn Cần Thơ</a>
+      <a href="#" class="link-item"><div class="link-icon">🤝</div> Hội LHTN Việt Nam</a>
+      <a href="#" class="link-item"><div class="link-icon">🏫</div> UBND xã Hòa Tú</a>
+      <a href="#" class="link-item"><div class="link-icon">📰</div> Báo Thanh niên</a>
+      <a href="#" class="link-item"><div class="link-icon">📺</div> Đài PT-TH TP Cần Thơ</a>
+    </div>
+  </div>
+
+  <div style="background:linear-gradient(135deg,var(--blue),var(--blue-light));border-radius:8px;padding:16px;color:#fff;text-align:center">
+    <div style="font-size:36px;margin-bottom:8px">📱</div>
+    <div style="font-weight:700;font-size:14px;margin-bottom:4px">Kết nối với chúng tôi</div>
+    <div style="font-size:12px;opacity:.85;margin-bottom:12px">Theo dõi Fanpage Đoàn xã Hòa Tú</div>
+    <a href="#" style="display:inline-block;background:#fff;color:var(--blue);font-weight:700;font-size:12px;padding:7px 18px;border-radius:20px">Fanpage Facebook</a>
+  </div>
+
+</aside>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3>Đoàn TNCS Hồ Chí Minh Xã Hòa Tú<br>Thành phố Cần Thơ</h3>
+      <p>Cơ quan ngôn luận của Đoàn TNCS Hồ Chí Minh xã Hòa Tú. Trang thông tin điện tử cung cấp tin tức, hoạt động Đoàn và phong trào thanh niên địa phương.</p>
+      <ul class="contact-info">
+        <li>📍 Ấp Hòa Phuông, xã Hòa Tú, Thành phố Cần Thơ</li>
+        <li>📞 <strong style="color:#fff">0297 3XXX XXX</strong></li>
+        <li>📧 ...................</li>
+        <li>🕐 Giờ làm việc: 7:30 – 11:30 | 13:30 – 17:00 (Thứ Hai – Thứ Sáu)</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Menu chính</h4>
+      <ul>
+        <li><a href="#">Trang chủ</a></li>
+        <li><a href="#">Cơ cấu tổ chức</a></li>
+        <li><a href="#">Hoạt động Đoàn</a></li>
+        <li><a href="#">Hoạt động Hội</a></li>
+        <li><a href="#">Hệ thống văn bản</a></li>
+        <li><a href="#">Ảnh – Video</a></li>
+        <li><a href="#">Liên hệ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tin tức</h4>
+      <ul>
+        <li><a href="#">Tin tức sự kiện</a></li>
+        <li><a href="#">Tin tức Đoàn</a></li>
+        <li><a href="#">Tin tức Hội</a></li>
+        <li><a href="#">Tin Trung ương Đoàn</a></li>
+        <li><a href="#">Tin địa phương</a></li>
+        <li><a href="#">Văn bản mới nhất</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Hỗ trợ</h4>
+      <ul>
+        <li><a href="#">Ban Chấp hành</a></li>
+        <li><a href="#">Gửi ý kiến phản hồi</a></li>
+        <li><a href="#">Báo lỗi trang web</a></li>
+        <li><a href="#">Góp ý nội dung</a></li>
+        <li><a href="#">Hỏi đáp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>
+      © 2026 <strong>Đoàn TNCS Hồ Chí Minh xã Hòa Tú</strong> – Bản quyền thuộc Đoàn xã Hòa Tú, Thành phố Cần Thơ.<br>
+      <strong>Người phát ngôn:</strong> Đ/c Mai Thanh Minh – Bí thư Đoàn xã Hòa Tú &nbsp;|&nbsp; ĐT: 0919.114.663
+    </div>
+    <div style="text-align:right;line-height:1.8">
+      Thiết kế & Vận hành bởi Ban Tuyên giáo Đoàn xã Hòa Tú<br>
+      <a href="#">Chính sách bảo mật</a> &nbsp;|&nbsp; <a href="#">Điều khoản sử dụng</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  let cur=0;
+  const slides=document.querySelectorAll('.hero-slide');
+  const dots=document.querySelectorAll('.hero-dot');
+  function goSlide(n){
+    slides[cur].classList.remove('active');dots[cur].classList.remove('active');
+    cur=(n+slides.length)%slides.length;
+    slides[cur].classList.add('active');dots[cur].classList.add('active');
+  }
+  function changeSlide(d){goSlide(cur+d);}
+  setInterval(()=>changeSlide(1),5000);
+  function switchTab(btn,id){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');document.getElementById(id).classList.add('active');
+  }
+</script>
+</body>
+</html>
