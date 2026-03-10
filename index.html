@@ -27,7 +27,7 @@
   .header-inner{max-width:1200px;margin:0 auto;padding:18px 16px;display:flex;align-items:center;gap:20px;position:relative;z-index:1}
   .header-logo{width:82px;height:82px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,.25);border:3px solid var(--gold)}
   .header-title h1{font-family:'Merriweather',serif;font-size:20px;font-weight:900;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.3);line-height:1.3;text-transform:uppercase;letter-spacing:.5px}
-  .header-title h3{color:rgba(255,255,255,.85);font-size:13px;margin-top:3px}
+  .header-title h3{color:rgba(255,255,255,.85);font-size:13px;margin-top:3px;font-weight:400}
   .header-title .slogan{color:var(--gold);font-weight:600;font-size:13px;margin-top:4px;font-style:italic}
   .header-right{margin-left:auto;display:flex;gap:10px}
   .header-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:6px;padding:8px 14px;text-align:center;font-size:11px;backdrop-filter:blur(4px)}
@@ -108,7 +108,6 @@
   .tab-btn:hover{color:var(--blue)}
   .tab-content{display:none}
   .tab-content.active{display:block}
-
   .content-section{margin-bottom:24px}
 
   .doc-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:all .2s}
@@ -125,7 +124,7 @@
 
   .sidebar{display:flex;flex-direction:column;gap:18px}
   .widget{background:var(--bg-card);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
-  .widget-header{background:var(--blue);color:#fff;padding:10px 14px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:8px}
+  .widget-header{background:var(--blue);color:#fff;padding:10px 14px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;justify-content:space-between}
   .widget-body{padding:14px}
 
   .cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
@@ -140,7 +139,7 @@
   .cal-day.has-event::after{content:'';position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:var(--blue);border-radius:50%}
   .cal-day.other-month{color:#ccc}
 
-  .schedule-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12.5px}
+  .schedule-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12.5px;align-items:flex-start}
   .schedule-date{background:var(--red);color:#fff;border-radius:5px;padding:4px 8px;text-align:center;font-weight:700;font-size:11px;min-width:38px;flex-shrink:0}
   .schedule-date span{display:block;font-size:16px;line-height:1}
 
@@ -178,25 +177,61 @@
     .header-title h1{font-size:15px}
   }
   @keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
   .widget,.news-card,.content-section{animation:fadeInUp .4s ease both}
+
+  /* ===== MODAL & ADMIN ===== */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center}
+  .modal-overlay.open{display:flex}
+  .modal{background:#fff;border-radius:10px;padding:28px;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:90vh;overflow-y:auto}
+  .modal h3{font-family:'Merriweather',serif;font-size:16px;color:var(--blue);margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid var(--red)}
+  .modal label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;margin-top:12px}
+  .modal input,.modal textarea,.modal select{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:9px 12px;font-size:13.5px;font-family:inherit;outline:none;transition:border .2s;background:#fafbff}
+  .modal input:focus,.modal textarea:focus,.modal select:focus{border-color:var(--blue)}
+  .modal textarea{min-height:80px;resize:vertical}
+  .modal-btns{display:flex;gap:10px;margin-top:20px;justify-content:flex-end}
+  .btn-primary{background:var(--blue);color:#fff;border:none;padding:9px 22px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer;transition:background .2s}
+  .btn-primary:hover{background:var(--blue-light)}
+  .btn-red{background:var(--red);color:#fff;border:none;padding:9px 22px;border-radius:6px;font-size:13.5px;font-weight:600;cursor:pointer}
+  .btn-cancel{background:#eee;color:#555;border:none;padding:9px 18px;border-radius:6px;font-size:13.5px;cursor:pointer}
+  .admin-topbar{background:linear-gradient(90deg,#001a52,var(--blue-mid));color:#fff;padding:8px 24px;font-size:12.5px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .admin-topbar span{display:flex;align-items:center;gap:8px}
+  .admin-topbar button{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;padding:4px 14px;border-radius:4px;cursor:pointer;font-size:12px;transition:background .2s}
+  .admin-topbar button:hover{background:rgba(255,255,255,.3)}
+  .admin-post-bar{background:#f0f4ff;border:1px dashed var(--blue);border-radius:8px;padding:10px 14px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .admin-post-bar span{font-size:12.5px;font-weight:700;color:var(--blue);margin-right:4px}
+  .abtn{border:none;padding:7px 14px;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;transition:opacity .2s}
+  .abtn:hover{opacity:.85}
+  .del-btn{background:none;border:none;color:#ccc;cursor:pointer;font-size:12px;padding:2px 4px;flex-shrink:0;transition:color .2s;line-height:1}
+  .del-btn:hover{color:var(--red)}
+  .empty-news{color:var(--text-muted);font-size:13px;padding:18px 0;text-align:center;font-style:italic}
 </style>
 </head>
-<link rel="icon" type="image/x-icon" href="favicon.ico" style ="border-radius: 20px">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 <body>
 
+<!-- ===== ADMIN TOP BAR ===== -->
+<div id="admin-bar" style="display:none" class="admin-topbar">
+  <span>&#128273; Chế độ quản trị &nbsp;|&nbsp; Đang đăng nhập: <strong id="admin-name-display"></strong></span>
+  <button onclick="adminLogout()">&#128682; Đăng xuất</button>
+</div>
+
+<!-- ===== TOP BAR ===== -->
 <div class="topbar">
   <div class="topbar-inner">
-    <span>📅 Thứ Hai, ngày 09 tháng 03 năm 2026 &nbsp;|&nbsp; Chào mừng đến với trang Đoàn TNCS Hồ Chí Minh xã Hòa Tú</span>
+    <span id="topbar-date">&#128197; Đang tải...</span>
     <div class="topbar-right">
-      <a href="#">Đăng nhập</a><span>|</span><a href="#">Liên hệ</a><span>|</span><a href="#">RSS</a>
+      <a href="#" onclick="openLogin();return false;" id="login-link">&#128274; Đăng nhập Admin</a>
+      <span>|</span><a href="#">Liên hệ</a><span>|</span><a href="#">RSS</a>
     </div>
   </div>
 </div>
 
+<!-- ===== HEADER ===== -->
 <header class="header">
   <div class="header-inner">
     <div class="header-logo">
-        <img src="logodoan.png" alt="Logo" height="80"/>
+      <img src="logodoan.png" alt="Logo" height="80" onerror="this.style.display='none';this.parentNode.innerHTML='&#127775;'"/>
     </div>
     <div class="header-title">
       <h1>Đoàn TNCS Hồ Chí Minh Xã Hòa Tú</h1>
@@ -211,11 +246,12 @@
   </div>
 </header>
 
+<!-- ===== NAV ===== -->
 <nav>
   <div class="nav-inner">
-    <div class="nav-item active"><a href="#">🏠 Trang chủ</a></div>
+    <div class="nav-item active"><a href="#">&#127968; Trang chủ</a></div>
     <div class="nav-item">
-      <a href="#">🏛️ Cơ cấu tổ chức ▾</a>
+      <a href="#">&#127963;&#65039; Cơ cấu tổ chức &#9660;</a>
       <div class="dropdown">
         <a href="#">Ban Chấp hành Đoàn xã</a>
         <a href="#">Các chi đoàn trực thuộc</a>
@@ -225,7 +261,7 @@
       </div>
     </div>
     <div class="nav-item">
-      <a href="#">🎯 Hoạt động Đoàn ▾</a>
+      <a href="#">&#127919; Hoạt động Đoàn &#9660;</a>
       <div class="dropdown">
         <a href="#">Công tác Đoàn</a>
         <a href="#">Phong trào thanh niên</a>
@@ -235,7 +271,7 @@
       </div>
     </div>
     <div class="nav-item">
-      <a href="#">🤝 Hoạt động Hội ▾</a>
+      <a href="#">&#129309; Hoạt động Hội &#9660;</a>
       <div class="dropdown">
         <a href="#">Hội LHTN Việt Nam xã</a>
         <a href="#">Câu lạc bộ thanh niên</a>
@@ -244,7 +280,7 @@
       </div>
     </div>
     <div class="nav-item">
-      <a href="#">📋 Hệ thống văn bản ▾</a>
+      <a href="#">&#128203; Hệ thống văn bản &#9660;</a>
       <div class="dropdown">
         <a href="#">Văn bản Trung ương Đoàn</a>
         <a href="#">Văn bản Thành Đoàn</a>
@@ -253,7 +289,7 @@
       </div>
     </div>
     <div class="nav-item">
-      <a href="#">📸 Ảnh – Video ▾</a>
+      <a href="#">&#128248; Ảnh – Video &#9660;</a>
       <div class="dropdown">
         <a href="#">Thư viện ảnh</a>
         <a href="#">Video hoạt động</a>
@@ -262,26 +298,29 @@
     </div>
     <div class="nav-search">
       <input type="text" placeholder="Tìm kiếm...">
-      <button>🔍</button>
+      <button>&#128269;</button>
     </div>
   </div>
 </nav>
 
+<!-- ===== TICKER ===== -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-label">🔔 Tin mới</span>
+    <span class="ticker-label">&#128276; Tin mới</span>
     <div class="ticker-track">
-      <span class="ticker-text">📢 Triển khai Chương trình "Thanh niên tình nguyện hè 2026" &nbsp;|&nbsp; 🏆 Đoàn xã Hòa Tú đạt danh hiệu "Đoàn cơ sở xuất sắc" năm 2025 &nbsp;|&nbsp; 📣 Thông báo: Kỳ họp BCH Đoàn xã tháng 3/2026 vào ngày 15/3 &nbsp;|&nbsp; 🌟 Phong trào "Thanh niên khởi nghiệp" năm 2026 chính thức phát động &nbsp;|&nbsp; 🎯 Lễ kết nạp Đoàn viên mới năm 2026 tại Hội trường UBND xã</span>
+      <span class="ticker-text">&#128226; Triển khai Chương trình "Thanh niên tình nguyện hè 2026" &nbsp;|&nbsp; &#127942; Đoàn xã Hòa Tú đạt danh hiệu "Đoàn cơ sở xuất sắc" năm 2025 &nbsp;|&nbsp; &#128227; Thông báo: Kỳ họp BCH Đoàn xã tháng 3/2026 vào ngày 15/3 &nbsp;|&nbsp; &#127775; Phong trào "Thanh niên khởi nghiệp" năm 2026 chính thức phát động &nbsp;|&nbsp; &#127919; Lễ kết nạp Đoàn viên mới năm 2026 tại Hội trường UBND xã</span>
     </div>
   </div>
 </div>
 
+<!-- ===== MAIN ===== -->
 <div class="main">
 <main>
 
+  <!-- HERO SLIDER -->
   <div class="hero" id="hero">
     <div class="hero-slide active">
-      <div class="hero-bg">🌟</div>
+      <div class="hero-bg">&#127775;</div>
       <div class="hero-caption">
         <span class="hero-tag">Sự kiện nổi bật</span>
         <h2>Đại hội Đoàn TNCS Hồ Chí Minh xã Hòa Tú lần thứ XII nhiệm kỳ 2025–2027</h2>
@@ -289,7 +328,7 @@
       </div>
     </div>
     <div class="hero-slide">
-      <div class="hero-bg">🤝</div>
+      <div class="hero-bg">&#129309;</div>
       <div class="hero-caption">
         <span class="hero-tag">Tình nguyện</span>
         <h2>Chiến dịch "Mùa hè xanh 2026" – Thanh niên Hòa Tú tiên phong xây dựng nông thôn mới</h2>
@@ -297,7 +336,7 @@
       </div>
     </div>
     <div class="hero-slide">
-      <div class="hero-bg">🌱</div>
+      <div class="hero-bg">&#127807;</div>
       <div class="hero-caption">
         <span class="hero-tag">Khởi nghiệp</span>
         <h2>Hội thảo "Thanh niên khởi nghiệp, sáng tạo" tại xã Hòa Tú năm 2026</h2>
@@ -315,102 +354,96 @@
     </div>
   </div>
 
+  <!-- TIN TỨC SỰ KIỆN -->
   <div class="content-section">
     <div class="section-header">
-      <div class="section-title"><span class="icon">📰</span> Tin tức – Sự kiện</div>
-      <a href="#" class="see-all">Xem tất cả →</a>
+      <div class="section-title"><span class="icon">&#128240;</span> Tin tức – Sự kiện</div>
+      <a href="#" class="see-all">Xem tất cả &#8594;</a>
     </div>
     <div class="news-featured">
       <div class="news-card">
-        <div class="news-thumb bg1">🎉<span class="news-cat">Sự kiện</span></div>
+        <div class="news-thumb bg1">&#127881;<span class="news-cat">Sự kiện</span></div>
         <div class="news-body">
           <h3>Kỷ niệm 95 năm ngày thành lập Đoàn TNCS Hồ Chí Minh (26/3/1931 – 26/3/2026)</h3>
           <p>Đoàn xã Hòa Tú tổ chức lễ kỷ niệm trọng thể và chương trình văn nghệ chào mừng với sự tham gia của đông đảo đoàn viên...</p>
-          <div class="news-meta"><span>📅 20/03/2026</span><span>👁 1.2k lượt xem</span></div>
+          <div class="news-meta"><span>&#128197; 20/03/2026</span><span>&#128065; 1.2k lượt xem</span></div>
         </div>
       </div>
       <div class="news-card">
-        <div class="news-thumb bg2">🏆<span class="news-cat">Thành tích</span></div>
+        <div class="news-thumb bg2">&#127942;<span class="news-cat">Thành tích</span></div>
         <div class="news-body">
-          <h3>Đoàn xã Hòa Tú được tặng Bằng khen của UBND tỉnh Sóc Trăng năm 2025</h3>
+          <h3>Đoàn xã Hòa Tú được tặng Bằng khen của UBND TP Cần Thơ năm 2025</h3>
           <p>Ghi nhận những đóng góp xuất sắc trong phong trào thi đua yêu nước và xây dựng nông thôn mới nâng cao...</p>
-          <div class="news-meta"><span>📅 15/03/2026</span><span>👁 856 lượt xem</span></div>
+          <div class="news-meta"><span>&#128197; 15/03/2026</span><span>&#128065; 856 lượt xem</span></div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- TABS TIN TỨC (ADMIN MANAGED) -->
   <div class="content-section">
     <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab(this,'tab1')">🎯 Tin tức Đoàn</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab2')">🤝 Tin tức Hội</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab3')">🏛️ Tin Trung ương Đoàn</button>
-      <button class="tab-btn" onclick="switchTab(this,'tab4')">📌 Tin tức khác</button>
+      <button class="tab-btn active" onclick="switchTab(this,'tab1')">&#127919; Tin tức Đoàn</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab2')">&#129309; Tin tức Hội</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab3')">&#127963;&#65039; Tin Trung ương Đoàn</button>
+      <button class="tab-btn" onclick="switchTab(this,'tab4')">&#128204; Tin tức khác</button>
+    </div>
+
+    <!-- Admin add post bar -->
+    <div id="admin-post-bar" class="admin-post-bar" style="display:none">
+      <span>&#128274; Thêm bài:</span>
+      <button class="abtn" style="background:var(--red);color:#fff" onclick="openPostModal('doan')">+ Tin Đoàn</button>
+      <button class="abtn" style="background:var(--blue);color:#fff" onclick="openPostModal('hoi')">+ Tin Hội</button>
+      <button class="abtn" style="background:#444;color:#fff" onclick="openPostModal('truong')">+ Tin TW Đoàn</button>
+      <button class="abtn" style="background:#777;color:#fff" onclick="openPostModal('khac')">+ Tin khác</button>
     </div>
 
     <div class="tab-content active" id="tab1">
-      <div class="news-list">
-        <div class="news-list-item"><div class="news-list-thumb bg1">🎓</div><div class="news-list-content"><div class="news-list-title">Lớp bồi dưỡng lý luận chính trị cho đoàn viên mới kết nạp năm 2026 tại Hội trường UBND xã</div><div class="news-list-date">📅 08/03/2026 | Đoàn xã Hòa Tú</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg2">🌿</div><div class="news-list-content"><div class="news-list-title">Phát động phong trào "Ngày Chủ nhật xanh" dọn vệ sinh môi trường tháng 3/2026</div><div class="news-list-date">📅 05/03/2026 | BCH Đoàn xã</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg4">⚽</div><div class="news-list-content"><div class="news-list-title">Giải bóng đá thanh niên tranh Cúp Đoàn xã Hòa Tú năm 2026 – Khai mạc vòng sơ loại</div><div class="news-list-date">📅 01/03/2026 | BCH Đoàn xã</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg3">📚</div><div class="news-list-content"><div class="news-list-title">Cuộc thi "Tìm hiểu lịch sử Đảng Cộng sản Việt Nam" dành cho đoàn viên thanh niên xã Hòa Tú</div><div class="news-list-date">📅 25/02/2026 | BCH Đoàn xã</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg5">🎤</div><div class="news-list-content"><div class="news-list-title">Hội nghị sơ kết công tác Đoàn và phong trào thanh thiếu nhi tháng 02/2026</div><div class="news-list-date">📅 20/02/2026 | Ban Thường vụ</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg1">💡</div><div class="news-list-content"><div class="news-list-title">Kết nạp 24 đoàn viên mới nhân dịp kỷ niệm 96 năm ngày thành lập Đảng (3/2/2026)</div><div class="news-list-date">📅 03/02/2026 | BCH Đoàn xã</div></div></div>
-      </div>
-      <div style="text-align:center"><a href="#" style="display:inline-block;padding:8px 24px;background:var(--blue);color:#fff;border-radius:5px;font-size:13px;font-weight:600">Xem thêm tin tức Đoàn →</a></div>
+      <div class="news-list" id="news-doan"></div>
+      <div style="text-align:center;margin-top:6px"><a href="#" style="display:inline-block;padding:8px 24px;background:var(--blue);color:#fff;border-radius:5px;font-size:13px;font-weight:600">Xem thêm &#8594;</a></div>
     </div>
-
-    <div class="tab-content" id="tab2">
-      <div class="news-list">
-        <div class="news-list-item"><div class="news-list-thumb bg2">🌸</div><div class="news-list-content"><div class="news-list-title">Hội LHTN xã Hòa Tú tổ chức chương trình "Xuân tình nguyện – Tết yêu thương" năm 2026</div><div class="news-list-date">📅 07/03/2026 | Hội LHTN xã</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg4">🏗️</div><div class="news-list-content"><div class="news-list-title">CLB Thanh niên xung kích bàn giao cầu nông thôn mới tại ấp Hòa Thọ, xã Hòa Tú</div><div class="news-list-date">📅 03/03/2026 | Hội LHTN xã</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg3">🩺</div><div class="news-list-content"><div class="news-list-title">Chương trình khám bệnh, phát thuốc miễn phí cho người dân khó khăn trên địa bàn xã</div><div class="news-list-date">📅 28/02/2026 | Hội LHTN xã</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg5">🎓</div><div class="news-list-content"><div class="news-list-title">Trao 15 suất học bổng "Tiếp bước đến trường" cho học sinh nghèo vượt khó năm học 2025–2026</div><div class="news-list-date">📅 20/02/2026 | Hội LHTN xã</div></div></div>
-      </div>
-    </div>
-
+    <div class="tab-content" id="tab2"><div class="news-list" id="news-hoi"></div></div>
     <div class="tab-content" id="tab3">
-      <div class="news-list">
-        <div class="news-list-item"><div class="news-list-thumb bg1">🏛️</div><div class="news-list-content"><div class="news-list-title">BCH Trung ương Đoàn họp phiên thường kỳ đầu năm 2026 bàn về công tác thanh niên và phong trào Đoàn</div><div class="news-list-date">📅 08/03/2026 | Trung ương Đoàn</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg2">🚀</div><div class="news-list-content"><div class="news-list-title">Trung ương Đoàn phát động Chiến dịch thanh niên tình nguyện hè 2026 với chủ đề "Vì cộng đồng"</div><div class="news-list-date">📅 05/03/2026 | Trung ương Đoàn</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg4">💻</div><div class="news-list-content"><div class="news-list-title">Chương trình "Chuyển đổi số cùng thanh niên" năm 2026 được triển khai rộng rãi trên toàn quốc</div><div class="news-list-date">📅 01/03/2026 | Trung ương Đoàn</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg3">🌏</div><div class="news-list-content"><div class="news-list-title">Đoàn Việt Nam tham dự Diễn đàn Thanh niên ASEAN 2026 tại Manila, Philippines</div><div class="news-list-date">📅 25/02/2026 | Trung ương Đoàn</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg5">📜</div><div class="news-list-content"><div class="news-list-title">Ban hành Quy chế đánh giá chất lượng Đoàn viên và tổ chức cơ sở Đoàn năm 2026</div><div class="news-list-date">📅 20/02/2026 | Trung ương Đoàn</div></div></div>
+      <div id="tw-status" style="display:flex;align-items:center;gap:8px;padding:10px 0 6px;font-size:12.5px;color:var(--text-muted)">
+        <span id="tw-spinner" style="display:inline-block;width:16px;height:16px;border:2px solid #dde3f0;border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0"></span>
+        <span id="tw-status-text">Đang tải tin từ Trung ương Đoàn...</span>
+        <button onclick="loadTWNews()" style="margin-left:auto;background:var(--blue);color:#fff;border:none;padding:4px 12px;border-radius:4px;font-size:12px;cursor:pointer;display:none" id="tw-retry-btn">&#8635; Tải lại</button>
+      </div>
+      <div class="news-list" id="news-truong"></div>
+      <div style="text-align:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
+        <a href="https://doanthanhnien.vn" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 20px;background:var(--blue);color:#fff;border-radius:5px;font-size:13px;font-weight:600">&#127963;&#65039; Xem thêm tại doanthanhnien.vn &#8599;</a>
       </div>
     </div>
-
-    <div class="tab-content" id="tab4">
-      <div class="news-list">
-        <div class="news-list-item"><div class="news-list-thumb bg1">🌾</div><div class="news-list-content"><div class="news-list-title">Tin địa phương: Xã Hòa Tú chính thức được công nhận xã nông thôn mới nâng cao năm 2025</div><div class="news-list-date">📅 06/03/2026 | UBND xã Hòa Tú</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg2">🏖️</div><div class="news-list-content"><div class="news-list-title">Huyện Đoàn Mỹ Xuyên triển khai kế hoạch hoạt động hè 2026 cho toàn bộ cơ sở Đoàn trong huyện</div><div class="news-list-date">📅 04/03/2026 | Huyện Đoàn Mỹ Xuyên</div></div></div>
-        <div class="news-list-item"><div class="news-list-thumb bg3">📢</div><div class="news-list-content"><div class="news-list-title">Tỉnh Đoàn Sóc Trăng phát động thi đua chào mừng 95 năm ngày thành lập Đoàn TNCS HCM</div><div class="news-list-date">📅 02/03/2026 | Tỉnh Đoàn Sóc Trăng</div></div></div>
-      </div>
-    </div>
+    <div class="tab-content" id="tab4"><div class="news-list" id="news-khac"></div></div>
   </div>
 
+  <!-- VĂN BẢN -->
   <div class="content-section">
     <div class="section-header">
-      <div class="section-title"><span class="icon">📋</span> Văn bản – Quy định</div>
-      <a href="#" class="see-all">Xem tất cả →</a>
+      <div class="section-title"><span class="icon">&#128203;</span> Văn bản – Quy định</div>
+      <a href="#" class="see-all">Xem tất cả &#8594;</a>
     </div>
-    <div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-title">Quyết định về việc ban hành Chương trình hành động của Đoàn xã Hòa Tú năm 2026</div><div class="doc-meta">📅 01/01/2026 | Đoàn xã Hòa Tú | Số: 01/QĐ-ĐX</div></div></div>
-    <div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-title">Hướng dẫn đánh giá xếp loại Đoàn viên và tổ chức cơ sở Đoàn năm 2025–2026</div><div class="doc-meta">📅 15/12/2025 | Huyện Đoàn Mỹ Xuyên | Số: 45/HD-HĐ</div></div></div>
-    <div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-title">Kế hoạch tổ chức hoạt động kỷ niệm 95 năm ngày thành lập Đoàn TNCS Hồ Chí Minh (26/3/2026)</div><div class="doc-meta">📅 10/03/2026 | Tỉnh Đoàn Sóc Trăng | Số: 12/KH-TĐ</div></div></div>
-    <div class="doc-item"><div class="doc-icon">📜</div><div><div class="doc-title">Điều lệ Đoàn TNCS Hồ Chí Minh (Đại hội Đại biểu toàn quốc lần thứ XII)</div><div class="doc-meta">📅 2022 | Trung ương Đoàn TNCS Hồ Chí Minh</div></div></div>
+    <div class="doc-item"><div class="doc-icon">&#128196;</div><div><div class="doc-title">Quyết định về việc ban hành Chương trình hành động của Đoàn xã Hòa Tú năm 2026</div><div class="doc-meta">&#128197; 01/01/2026 | Đoàn xã Hòa Tú | Số: 01/QĐ-ĐX</div></div></div>
+    <div class="doc-item"><div class="doc-icon">&#128196;</div><div><div class="doc-title">Hướng dẫn đánh giá xếp loại Đoàn viên và tổ chức cơ sở Đoàn năm 2025–2026</div><div class="doc-meta">&#128197; 15/12/2025 | Thành Đoàn Cần Thơ | Số: 45/HD-TĐ</div></div></div>
+    <div class="doc-item"><div class="doc-icon">&#128196;</div><div><div class="doc-title">Kế hoạch tổ chức hoạt động kỷ niệm 95 năm ngày thành lập Đoàn TNCS Hồ Chí Minh (26/3/2026)</div><div class="doc-meta">&#128197; 10/03/2026 | Thành Đoàn Cần Thơ | Số: 12/KH-TĐ</div></div></div>
+    <div class="doc-item"><div class="doc-icon">&#128220;</div><div><div class="doc-title">Điều lệ Đoàn TNCS Hồ Chí Minh (Đại hội Đại biểu toàn quốc lần thứ XII)</div><div class="doc-meta">&#128197; 2022 | Trung ương Đoàn TNCS Hồ Chí Minh</div></div></div>
   </div>
 
+  <!-- BANNER -->
   <div class="banner-strip">
-    <span class="icon">🌿</span>
+    <span class="icon">&#127807;</span>
     <div><h3>Chiến dịch Thanh niên tình nguyện Hè 2026</h3><p>Đăng ký tham gia và cùng chung tay xây dựng xã Hòa Tú ngày càng văn minh, phát triển</p></div>
     <a href="#" style="margin-left:auto;background:#fff;color:var(--red);padding:10px 20px;border-radius:6px;font-weight:700;font-size:13px;white-space:nowrap">Đăng ký ngay</a>
   </div>
 
 </main>
 
+<!-- ===== SIDEBAR ===== -->
 <aside class="sidebar">
 
+  <!-- Thống kê -->
   <div class="widget">
-    <div class="widget-header">📊 Thống kê tổ chức</div>
+    <div class="widget-header">&#128202; Thống kê tổ chức</div>
     <div class="widget-body">
       <div class="counter-grid">
         <div class="counter-item"><strong>-</strong><small>Đoàn viên</small></div>
@@ -422,53 +455,48 @@
     </div>
   </div>
 
+  <!-- CALENDAR ĐỘNG -->
   <div class="widget">
-    <div class="widget-header">📅 Lịch tháng 3 – 2026</div>
+    <div class="widget-header" id="cal-widget-header">&#128197; Lịch</div>
     <div class="widget-body">
-      <div>
-        <div class="cal-nav">
-          <button>&#8249;</button>
-          <span class="cal-title">Tháng 3 – 2026</span>
-          <button>&#8250;</button>
-        </div>
-        <div class="cal-grid">
-          <div class="cal-day-name">CN</div><div class="cal-day-name">T2</div><div class="cal-day-name">T3</div><div class="cal-day-name">T4</div><div class="cal-day-name">T5</div><div class="cal-day-name">T6</div><div class="cal-day-name">T7</div>
-          <div class="cal-day other-month">22</div><div class="cal-day other-month">23</div><div class="cal-day other-month">24</div><div class="cal-day other-month">25</div><div class="cal-day other-month">26</div><div class="cal-day other-month">27</div><div class="cal-day other-month">1</div>
-          <div class="cal-day">2</div><div class="cal-day has-event">3</div><div class="cal-day">4</div><div class="cal-day has-event">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div>
-          <div class="cal-day today">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day has-event">13</div><div class="cal-day">14</div><div class="cal-day has-event">15</div>
-          <div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day has-event">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
-          <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day has-event">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
-          <div class="cal-day">30</div><div class="cal-day">31</div>
-        </div>
+      <div class="cal-nav">
+        <button onclick="calPrev()">&#8249;</button>
+        <span class="cal-title" id="cal-title"></span>
+        <button onclick="calNext()">&#8250;</button>
       </div>
+      <div class="cal-grid" id="cal-grid"></div>
     </div>
   </div>
 
+  <!-- LỊCH LÀM VIỆC ĐỘNG -->
   <div class="widget">
-    <div class="widget-header" style="background:var(--red)">📌 Lịch làm việc tháng 3</div>
-    <div class="widget-body">
-      <div class="schedule-item"><div class="schedule-date">T3<span>13</span></div><div>Họp BCH Đoàn xã thường kỳ Quý I/2026 tại Hội trường UBND xã</div></div>
-      <div class="schedule-item"><div class="schedule-date">CN<span>15</span></div><div>Lễ kết nạp Đoàn viên mới năm 2026 – Đợt 1 (đầu năm)</div></div>
-      <div class="schedule-item"><div class="schedule-date">T5<span>20</span></div><div>Lễ kỷ niệm 95 năm Ngày thành lập Đoàn TNCS Hồ Chí Minh</div></div>
-      <div class="schedule-item"><div class="schedule-date">T4<span>26</span></div><div>Mít tinh kỷ niệm Ngày thành lập Đoàn và trao giải thi đua</div></div>
-      <div class="schedule-item"><div class="schedule-date">T7<span>29</span></div><div>Ngày Chủ nhật xanh – Vệ sinh đường làng ngõ xóm toàn xã</div></div>
+    <div class="widget-header" style="background:var(--red)">
+      <span>&#128204; Lịch làm việc</span>
+      <span id="sch-admin-btn" style="display:none">
+        <button onclick="openScheduleModal()" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;font-size:11px;padding:3px 10px;border-radius:4px;cursor:pointer;font-weight:600">+ Thêm</button>
+      </span>
+    </div>
+    <div class="widget-body" id="schedule-list">
+      <div class="empty-news">Chưa có lịch. Admin vui lòng đăng nhập để thêm.</div>
     </div>
   </div>
 
+  <!-- LIÊN KẾT -->
   <div class="widget">
-    <div class="widget-header">🔗 Liên kết website</div>
+    <div class="widget-header">&#128279; Liên kết website</div>
     <div class="widget-body">
-      <a href="https://doanthanhnien.vn" target="_blank" class="link-item"><div class="link-icon">🏛️</div> Trung ương Đoàn TNCS HCM</a>
-      <a href="#" class="link-item"><div class="link-icon">🌐</div> Thành Đoàn Cần Thơ</a>
-      <a href="#" class="link-item"><div class="link-icon">🤝</div> Hội LHTN Việt Nam</a>
-      <a href="#" class="link-item"><div class="link-icon">🏫</div> UBND xã Hòa Tú</a>
-      <a href="#" class="link-item"><div class="link-icon">📰</div> Báo Thanh niên</a>
-      <a href="#" class="link-item"><div class="link-icon">📺</div> Đài PT-TH TP Cần Thơ</a>
+      <a href="https://doanthanhnien.vn" target="_blank" class="link-item"><div class="link-icon">&#127963;&#65039;</div> Trung ương Đoàn TNCS HCM</a>
+      <a href="#" class="link-item"><div class="link-icon">&#127968;</div> Thành Đoàn Cần Thơ</a>
+      <a href="#" class="link-item"><div class="link-icon">&#129309;</div> Hội LHTN Việt Nam</a>
+      <a href="#" class="link-item"><div class="link-icon">&#127979;</div> UBND xã Hòa Tú</a>
+      <a href="#" class="link-item"><div class="link-icon">&#128240;</div> Báo Thanh niên</a>
+      <a href="#" class="link-item"><div class="link-icon">&#128250;</div> Đài PT-TH TP Cần Thơ</a>
     </div>
   </div>
 
+  <!-- FACEBOOK -->
   <div style="background:linear-gradient(135deg,var(--blue),var(--blue-light));border-radius:8px;padding:16px;color:#fff;text-align:center">
-    <div style="font-size:36px;margin-bottom:8px">📱</div>
+    <div style="font-size:36px;margin-bottom:8px">&#128241;</div>
     <div style="font-weight:700;font-size:14px;margin-bottom:4px">Kết nối với chúng tôi</div>
     <div style="font-size:12px;opacity:.85;margin-bottom:12px">Theo dõi Fanpage Đoàn xã Hòa Tú</div>
     <a href="#" style="display:inline-block;background:#fff;color:var(--blue);font-weight:700;font-size:12px;padding:7px 18px;border-radius:20px">Fanpage Facebook</a>
@@ -477,16 +505,17 @@
 </aside>
 </div>
 
+<!-- ===== FOOTER ===== -->
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
       <h3>Đoàn TNCS Hồ Chí Minh Xã Hòa Tú<br>Thành phố Cần Thơ</h3>
       <p>Cơ quan ngôn luận của Đoàn TNCS Hồ Chí Minh xã Hòa Tú. Trang thông tin điện tử cung cấp tin tức, hoạt động Đoàn và phong trào thanh niên địa phương.</p>
       <ul class="contact-info">
-        <li>📍 Ấp Hòa Phuông, xã Hòa Tú, Thành phố Cần Thơ</li>
-        <li>📞 <strong style="color:#fff">0297 3XXX XXX</strong></li>
-        <li>📧 ...................</li>
-        <li>🕐 Giờ làm việc: 7:30 – 11:30 | 13:30 – 17:00 (Thứ Hai – Thứ Sáu)</li>
+        <li>&#128205; Ấp Hòa Phuông, xã Hòa Tú, Thành phố Cần Thơ</li>
+        <li>&#128222; <strong style="color:#fff">0297 3XXX XXX</strong></li>
+        <li>&#128231; ...................</li>
+        <li>&#128336; Giờ làm việc: 7:30 – 11:30 | 13:30 – 17:00 (Thứ Hai – Thứ Sáu)</li>
       </ul>
     </div>
     <div class="footer-col">
@@ -525,41 +554,505 @@
   </div>
   <div class="footer-bottom">
     <div>
-      © 2026 <strong>Đoàn TNCS Hồ Chí Minh xã Hòa Tú</strong> – Bản quyền thuộc Đoàn xã Hòa Tú, Thành phố Cần Thơ.<br>
+      &#169; 2026 <strong>Đoàn TNCS Hồ Chí Minh xã Hòa Tú</strong> – Bản quyền thuộc Đoàn xã Hòa Tú, Thành phố Cần Thơ.<br>
       <strong>Người phát ngôn:</strong> Đ/c Mai Thanh Minh – Bí thư Đoàn xã Hòa Tú &nbsp;|&nbsp; ĐT: 0919.114.663
     </div>
     <div style="text-align:right;line-height:1.8">
-      Thiết kế & Vận hành bởi Ban Tuyên giáo Đoàn xã Hòa Tú<br>
+      Thiết kế &amp; Vận hành bởi Ban Tuyên giáo Đoàn xã Hòa Tú<br>
       <a href="#">Chính sách bảo mật</a> &nbsp;|&nbsp; <a href="#">Điều khoản sử dụng</a>
     </div>
   </div>
 </footer>
 
+<!-- ===== MODALS ===== -->
+
+<!-- LOGIN -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal" style="max-width:360px">
+    <h3>&#128274; Đăng nhập Quản trị</h3>
+    <label>Tên đăng nhập</label>
+    <input type="text" id="login-user" placeholder="Nhập tên đăng nhập" autocomplete="username">
+    <label>Mật khẩu</label>
+    <input type="password" id="login-pass" placeholder="Nhập mật khẩu" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    <div id="login-err" style="color:var(--red);font-size:12.5px;margin-top:8px;display:none">&#10060; Sai tên đăng nhập hoặc mật khẩu!</div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal('login-modal')">Hủy</button>
+      <button class="btn-primary" onclick="doLogin()">Đăng nhập</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD POST -->
+<div class="modal-overlay" id="post-modal">
+  <div class="modal">
+    <h3>&#128221; Thêm bài viết mới</h3>
+    <label>Tiêu đề bài viết <span style="color:var(--red)">*</span></label>
+    <input type="text" id="post-title" placeholder="Nhập tiêu đề bài viết...">
+    <label>Mô tả ngắn</label>
+    <textarea id="post-desc" placeholder="Tóm tắt nội dung..."></textarea>
+    <label>Danh mục <span style="color:var(--red)">*</span></label>
+    <select id="post-cat">
+      <option value="doan">&#127919; Tin tức Đoàn</option>
+      <option value="hoi">&#129309; Tin tức Hội</option>
+      <option value="truong">&#127963;&#65039; Tin Trung ương Đoàn</option>
+      <option value="khac">&#128204; Tin tức khác</option>
+    </select>
+    <label>Nguồn / Đơn vị đăng</label>
+    <input type="text" id="post-source" placeholder="VD: BCH Đoàn xã, Hội LHTN...">
+    <label>Biểu tượng (emoji, tùy chọn)</label>
+    <input type="text" id="post-icon" placeholder="VD: 🎯" maxlength="4" style="width:90px">
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal('post-modal')">Hủy</button>
+      <button class="btn-primary" onclick="savePost()">&#128190; Lưu bài viết</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD SCHEDULE -->
+<div class="modal-overlay" id="schedule-modal">
+  <div class="modal" style="max-width:420px">
+    <h3>&#128204; Thêm lịch làm việc</h3>
+    <label>Ngày <span style="color:var(--red)">*</span></label>
+    <input type="date" id="sch-date">
+    <label>Nội dung sự kiện / công việc <span style="color:var(--red)">*</span></label>
+    <textarea id="sch-content" placeholder="Mô tả nội dung buổi làm việc, hội họp, sự kiện..."></textarea>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal('schedule-modal')">Hủy</button>
+      <button class="btn-primary" onclick="saveSchedule()">&#128190; Lưu lịch</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== JAVASCRIPT ===== -->
 <script>
-  let cur=0;
-  const slides=document.querySelectorAll('.hero-slide');
-  const dots=document.querySelectorAll('.hero-dot');
-  function goSlide(n){
-    slides[cur].classList.remove('active');dots[cur].classList.remove('active');
-    cur=(n+slides.length)%slides.length;
-    slides[cur].classList.add('active');dots[cur].classList.add('active');
+// ============================================================
+// CẤU HÌNH ADMIN (thay đổi tài khoản/mật khẩu tại đây)
+// ============================================================
+const ADMIN_ACCOUNTS = [
+  { user: 'admin', pass: 'doanhoatu2026', name: 'Admin Hòa Tú' }
+];
+// Tên key lưu trong localStorage
+const K_POSTS = 'dht_posts_v2';
+const K_SCH   = 'dht_sch_v2';
+const K_SES   = 'dht_session_v2';
+
+// ============================================================
+// SLIDER
+// ============================================================
+let cur = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const dots   = document.querySelectorAll('.hero-dot');
+function goSlide(n) {
+  slides[cur].classList.remove('active'); dots[cur].classList.remove('active');
+  cur = (n + slides.length) % slides.length;
+  slides[cur].classList.add('active'); dots[cur].classList.add('active');
+}
+function changeSlide(d) { goSlide(cur + d); }
+setInterval(() => changeSlide(1), 5000);
+
+// ============================================================
+// TABS
+// ============================================================
+function switchTab(btn, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// ============================================================
+// TOPBAR DATE – tự động theo ngày thực tế
+// ============================================================
+(function setDate() {
+  const now = new Date();
+  const DOW = ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+  const d = String(now.getDate()).padStart(2,'0');
+  const m = String(now.getMonth() + 1).padStart(2,'0');
+  const y = now.getFullYear();
+  document.getElementById('topbar-date').innerHTML =
+    '&#128197; ' + DOW[now.getDay()] + ', ngày ' + d + ' tháng ' + m + ' năm ' + y +
+    ' &nbsp;|&nbsp; Chào mừng đến với trang Đoàn TNCS Hồ Chí Minh xã Hòa Tú';
+})();
+
+// ============================================================
+// LỊCH ĐỘNG – tự cập nhật tháng/năm hiện tại
+// ============================================================
+const MONTH_NAMES = ['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6',
+                     'Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+const DAY_NAMES   = ['CN','T2','T3','T4','T5','T6','T7'];
+let calY, calM;
+
+function initCal() {
+  const now = new Date(); calY = now.getFullYear(); calM = now.getMonth();
+  renderCal();
+}
+
+function getEventDates() {
+  // Trả về Set các ngày trong tháng calY/calM có lịch làm việc
+  const set = new Set();
+  try {
+    const data = localStorage.getItem(K_SCH);
+    if (!data) return set;
+    JSON.parse(data).forEach(s => {
+      const d = new Date(s.date);
+      if (d.getFullYear() === calY && d.getMonth() === calM) set.add(d.getDate());
+    });
+  } catch(e) {}
+  return set;
+}
+
+function renderCal() {
+  const now    = new Date();
+  const title  = MONTH_NAMES[calM] + ' – ' + calY;
+  document.getElementById('cal-title').textContent = title;
+  document.getElementById('cal-widget-header').innerHTML = '&#128197; ' + title;
+
+  const first   = new Date(calY, calM, 1).getDay();       // 0=CN
+  const dim     = new Date(calY, calM + 1, 0).getDate();  // số ngày trong tháng
+  const dimPrev = new Date(calY, calM, 0).getDate();
+  const events  = getEventDates();
+
+  let h = '';
+  DAY_NAMES.forEach(n => { h += '<div class="cal-day-name">' + n + '</div>'; });
+
+  // Ngày tháng trước
+  for (let i = first - 1; i >= 0; i--)
+    h += '<div class="cal-day other-month">' + (dimPrev - i) + '</div>';
+
+  // Ngày tháng hiện tại
+  for (let d = 1; d <= dim; d++) {
+    let cls = 'cal-day';
+    if (d === now.getDate() && calM === now.getMonth() && calY === now.getFullYear())
+      cls += ' today';
+    if (events.has(d)) cls += ' has-event';
+    h += '<div class="' + cls + '">' + d + '</div>';
   }
-  function changeSlide(d){goSlide(cur+d);}
-  setInterval(()=>changeSlide(1),5000);
-  function switchTab(btn,id){
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-    btn.classList.add('active');document.getElementById(id).classList.add('active');
+
+  // Ngày tháng sau (fill hàng cuối)
+  const total = first + dim;
+  const rem   = (7 - total % 7) % 7;
+  for (let d = 1; d <= rem; d++)
+    h += '<div class="cal-day other-month">' + d + '</div>';
+
+  document.getElementById('cal-grid').innerHTML = h;
+}
+
+function calPrev() { calM--; if (calM < 0)  { calM = 11; calY--; } renderCal(); }
+function calNext() { calM++; if (calM > 11) { calM = 0;  calY++; } renderCal(); }
+
+// ============================================================
+// STORAGE HELPERS
+// ============================================================
+function getPosts(cat) {
+  try {
+    const all = JSON.parse(localStorage.getItem(K_POSTS) || '[]');
+    return cat ? all.filter(p => p.cat === cat) : all;
+  } catch(e) { return []; }
+}
+function allPosts()       { return getPosts(); }
+function setPosts(arr)    { localStorage.setItem(K_POSTS, JSON.stringify(arr)); }
+function getSchs()        { try { return JSON.parse(localStorage.getItem(K_SCH) || '[]'); } catch(e) { return []; } }
+function setSchs(arr)     { localStorage.setItem(K_SCH, JSON.stringify(arr)); }
+function getSession()     { try { return JSON.parse(localStorage.getItem(K_SES)); } catch(e) { return null; } }
+function isAdmin()        { return !!getSession(); }
+
+// ============================================================
+// RENDER BÀI VIẾT
+// ============================================================
+const BG_CLS = ['bg1','bg2','bg3','bg4','bg5'];
+const DEF_ICONS = ['📰','🎯','🌿','🎓','⚽','📚','💡','🤝','🌸','🏛️','🚀','💻','🌏','📜','🌾'];
+
+function renderNewsCat(cat, containerId) {
+  const posts = getPosts(cat);
+  const el    = document.getElementById(containerId);
+  const admin = isAdmin();
+  if (!posts.length) {
+    el.innerHTML = '<div class="empty-news">' +
+      (admin ? '&#128203; Chưa có bài viết – nhấn nút "+ Thêm" bên trên để đăng bài.'
+             : '&#128203; Chưa có bài viết trong mục này.') + '</div>';
+    return;
   }
+  // Hiển thị mới nhất trước
+  el.innerHTML = posts.slice().reverse().map((p, i) => {
+    const bg   = BG_CLS[i % 5];
+    const icon = p.icon || DEF_ICONS[i % DEF_ICONS.length];
+    const del  = admin
+      ? '<button class="del-btn" title="Xóa bài viết" onclick="delPost(\'' + p.id + '\',\'' + cat + '\',\'' + containerId + '\')">&#10005;</button>'
+      : '';
+    return '<div class="news-list-item">' +
+      '<div class="news-list-thumb ' + bg + '">' + icon + '</div>' +
+      '<div class="news-list-content" style="flex:1">' +
+        '<div class="news-list-title" style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px">' +
+          '<span>' + p.title + '</span>' + del +
+        '</div>' +
+        '<div class="news-list-date">&#128197; ' + p.date + ' | ' + (p.source || 'BCH Đoàn xã') + '</div>' +
+      '</div></div>';
+  }).join('');
+}
+
+function renderAllNews() {
+  renderNewsCat('doan', 'news-doan');
+  renderNewsCat('hoi',  'news-hoi');
+  // tab3 = TW Doan - loaded from RSS, not localStorage
+  renderNewsCat('khac', 'news-khac');
+}
+
+// ============================================================
+// TIN TRUNG ƯƠNG ĐOÀN – lấy từ doanthanhnien.vn qua RSS proxy
+// ============================================================
+// Dùng rss2json.com (CORS-friendly free proxy chuyển RSS sang JSON)
+// RSS gốc: https://doanthanhnien.vn (thử nhiều feed, fallback về Thanh Niên Đoàn)
+const TW_RSS_SOURCES = [
+  // doanthanhnien.vn - thử trực tiếp qua proxy
+  'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fdoanthanhnien.vn%2Ffeed',
+  'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fdoanthanhnien.vn%2Frss',
+  'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fdoanthanhnien.vn%2Frss%2F',
+  // Fallback: Thanh Niên chuyên mục liên quan Đoàn
+  'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fthanhnien.vn%2Frss%2Fchinh-tri.rss'
+];
+
+let twLoaded = false;
+
+async function loadTWNews() {
+  if (twLoaded) return;
+  const spinner  = document.getElementById('tw-spinner');
+  const statusEl = document.getElementById('tw-status-text');
+  const retryBtn = document.getElementById('tw-retry-btn');
+  const el       = document.getElementById('news-truong');
+
+  spinner.style.display  = 'inline-block';
+  retryBtn.style.display = 'none';
+  statusEl.textContent   = 'Đang kết nối tới doanthanhnien.vn...';
+  el.innerHTML           = '';
+
+  let items = null;
+  let sourceLabel = 'doanthanhnien.vn';
+
+  for (let i = 0; i < TW_RSS_SOURCES.length; i++) {
+    try {
+      const res  = await fetch(TW_RSS_SOURCES[i], { signal: AbortSignal.timeout(8000) });
+      const json = await res.json();
+      if (json.status === 'ok' && json.items && json.items.length > 0) {
+        items = json.items;
+        sourceLabel = i < 3 ? 'doanthanhnien.vn' : 'thanhnien.vn / Đoàn';
+        break;
+      }
+    } catch(e) { /* thử nguồn tiếp */ }
+    statusEl.textContent = 'Đang thử nguồn dự phòng...';
+  }
+
+  spinner.style.display = 'none';
+
+  if (!items || !items.length) {
+    statusEl.innerHTML   = '&#9888;&#65039; Không thể tải tin. Trang web có thể chặn truy cập tự động.';
+    retryBtn.style.display = 'inline-block';
+    el.innerHTML = renderTWFallback();
+    return;
+  }
+
+  twLoaded = true;
+  statusEl.innerHTML = '&#9989; Cập nhật từ <strong>' + sourceLabel + '</strong> &nbsp;·&nbsp; ' + new Date().toLocaleTimeString('vi-VN');
+
+  const bgCls  = ['bg1','bg2','bg3','bg4','bg5'];
+  const icons  = ['&#127963;&#65039;','&#128202;','&#127775;','&#128187;','&#127758;','&#128220;','&#128226;','&#127919;'];
+
+  el.innerHTML = items.slice(0, 8).map((item, i) => {
+    const bg      = bgCls[i % 5];
+    const icon    = icons[i % icons.length];
+    const pubDate = item.pubDate ? new Date(item.pubDate).toLocaleDateString('vi-VN') : '';
+    const link    = item.link || '#';
+    const title   = item.title || '(Không có tiêu đề)';
+    const author  = item.author || sourceLabel;
+    return '<a href="' + link + '" target="_blank" style="text-decoration:none;color:inherit">' +
+      '<div class="news-list-item">' +
+        '<div class="news-list-thumb ' + bg + '">' + icon + '</div>' +
+        '<div class="news-list-content">' +
+          '<div class="news-list-title" style="color:var(--text)">' + title + '</div>' +
+          '<div class="news-list-date">&#128197; ' + pubDate + ' | ' + author +
+            ' &nbsp;<span style="color:var(--red);font-size:11px">&#8599; Xem bài gốc</span></div>' +
+        '</div>' +
+      '</div></a>';
+  }).join('');
+}
+
+// Nội dung dự phòng khi không fetch được (hiển thị thông tin tĩnh + link)
+function renderTWFallback() {
+  const links = [
+    ['Trang chủ Trung ương Đoàn',       'https://doanthanhnien.vn'],
+    ['Tin tức – Sự kiện Đoàn',           'https://doanthanhnien.vn/tin-tuc'],
+    ['Phong trào Thanh niên',            'https://doanthanhnien.vn/phong-trao'],
+    ['Chương trình tình nguyện',         'https://doanthanhnien.vn/tinh-nguyen'],
+    ['Văn kiện – Chỉ đạo Đoàn',         'https://doanthanhnien.vn/van-kien'],
+  ];
+  return '<div style="background:#f8f9ff;border-radius:8px;padding:14px;margin-bottom:8px">' +
+    '<p style="font-size:12.5px;color:var(--text-muted);margin-bottom:10px">&#127963;&#65039; Truy cập trực tiếp trang Trung ương Đoàn:</p>' +
+    links.map(([label, url]) =>
+      '<a href="' + url + '" target="_blank" class="link-item" style="padding:7px 0">' +
+      '<div class="link-icon">&#127963;&#65039;</div>' + label + ' &#8599;</a>'
+    ).join('') + '</div>';
+}
+
+// Tự động tải khi người dùng bấm vào tab3
+document.querySelector('[onclick="switchTab(this,\'tab3\')"]')
+  ?.addEventListener('click', () => { if (!twLoaded) loadTWNews(); });
+
+// ============================================================
+// RENDER LỊCH LÀM VIỆC
+// ============================================================
+const DOW_SHORT = ['CN','T2','T3','T4','T5','T6','T7'];
+
+function renderSchedule() {
+  const all   = getSchs();
+  const el    = document.getElementById('schedule-list');
+  const admin = isAdmin();
+  if (!all.length) {
+    el.innerHTML = '<div class="empty-news">' +
+      (admin ? '&#128204; Chưa có lịch – nhấn "+ Thêm" để thêm lịch làm việc.'
+             : '&#128204; Chưa có lịch làm việc.') + '</div>';
+    return;
+  }
+  const sorted = all.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+  el.innerHTML = sorted.map(s => {
+    const d   = new Date(s.date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const dow = DOW_SHORT[d.getDay()];
+    const del = admin
+      ? '<button class="del-btn" title="Xóa lịch" onclick="delSch(\'' + s.id + '\')">&#10005;</button>'
+      : '';
+    return '<div class="schedule-item">' +
+      '<div class="schedule-date">' + dow + '<span>' + day + '</span></div>' +
+      '<div style="flex:1;display:flex;justify-content:space-between;align-items:flex-start;gap:4px">' +
+        '<span>' + s.content + '</span>' + del +
+      '</div></div>';
+  }).join('');
+}
+
+// ============================================================
+// ĐĂNG NHẬP / ĐĂNG XUẤT
+// ============================================================
+function openLogin() {
+  if (isAdmin()) { alert('Bạn đã đăng nhập rồi!'); return; }
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-err').style.display = 'none';
+  openModal('login-modal');
+}
+
+function doLogin() {
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value;
+  const found = ADMIN_ACCOUNTS.find(a => a.user === u && a.pass === p);
+  if (!found) {
+    document.getElementById('login-err').style.display = 'block'; return;
+  }
+  localStorage.setItem(K_SES, JSON.stringify({ user: u, name: found.name }));
+  closeModal('login-modal');
+  applyAdminUI();
+}
+
+function adminLogout() {
+  if (!confirm('Bạn có chắc muốn đăng xuất?')) return;
+  localStorage.removeItem(K_SES);
+  applyAdminUI();
+}
+
+function applyAdminUI() {
+  const ses   = getSession();
+  const admin = !!ses;
+  document.getElementById('admin-bar').style.display       = admin ? 'flex'   : 'none';
+  document.getElementById('admin-post-bar').style.display  = admin ? 'flex'   : 'none';
+  document.getElementById('sch-admin-btn').style.display   = admin ? 'inline' : 'none';
+  if (admin) {
+    document.getElementById('admin-name-display').textContent = ses.name;
+    document.getElementById('login-link').innerHTML = '&#128100; ' + ses.name;
+  } else {
+    document.getElementById('login-link').innerHTML = '&#128274; Đăng nhập Admin';
+  }
+  renderAllNews();
+  renderSchedule();
+}
+
+// ============================================================
+// MODAL HELPERS
+// ============================================================
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+});
+
+// ============================================================
+// THÊM / XÓA BÀI VIẾT
+// ============================================================
+function openPostModal(cat) {
+  document.getElementById('post-title').value  = '';
+  document.getElementById('post-desc').value   = '';
+  document.getElementById('post-source').value = '';
+  document.getElementById('post-icon').value   = '';
+  document.getElementById('post-cat').value    = cat;
+  openModal('post-modal');
+}
+
+function savePost() {
+  const title = document.getElementById('post-title').value.trim();
+  if (!title) { alert('Vui lòng nhập tiêu đề bài viết!'); return; }
+  const now = new Date();
+  const dateStr = String(now.getDate()).padStart(2,'0') + '/' +
+                  String(now.getMonth()+1).padStart(2,'0') + '/' + now.getFullYear();
+  const post = {
+    id:     'p' + Date.now(),
+    title:  title,
+    desc:   document.getElementById('post-desc').value.trim(),
+    cat:    document.getElementById('post-cat').value,
+    source: document.getElementById('post-source').value.trim() || 'BCH Đoàn xã',
+    icon:   document.getElementById('post-icon').value.trim() || '',
+    date:   dateStr
+  };
+  const all = allPosts(); all.push(post); setPosts(all);
+  closeModal('post-modal');
+  renderAllNews();
+}
+
+function delPost(id, cat, cid) {
+  if (!confirm('Xóa bài viết này?')) return;
+  setPosts(allPosts().filter(p => p.id !== id));
+  renderNewsCat(cat, cid);
+}
+
+// ============================================================
+// THÊM / XÓA LỊCH
+// ============================================================
+function openScheduleModal() {
+  document.getElementById('sch-date').value    = '';
+  document.getElementById('sch-content').value = '';
+  openModal('schedule-modal');
+}
+
+function saveSchedule() {
+  const date    = document.getElementById('sch-date').value;
+  const content = document.getElementById('sch-content').value.trim();
+  if (!date || !content) { alert('Vui lòng nhập đầy đủ ngày và nội dung!'); return; }
+  const all = getSchs(); all.push({ id: 's' + Date.now(), date, content });
+  setSchs(all);
+  closeModal('schedule-modal');
+  renderSchedule();
+  renderCal(); // Cập nhật dấu chấm sự kiện trên lịch
+}
+
+function delSch(id) {
+  if (!confirm('Xóa lịch này?')) return;
+  setSchs(getSchs().filter(s => s.id !== id));
+  renderSchedule();
+  renderCal();
+}
+
+// ============================================================
+// KHỞI TẠO
+// ============================================================
+initCal();
+applyAdminUI();
+// Tải sẵn tin TW Đoàn sau 1 giây (không block render trang)
+setTimeout(loadTWNews, 1000);
 </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
